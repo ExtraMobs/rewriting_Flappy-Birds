@@ -9,9 +9,9 @@ from scenes.staterscene import StarterScene
 class Flappy(Program):
     def __init__(self):
         super().__init__(Window((432, 768)), Display((288, 512)), framerate=60)
-        self.window.set_icon(resources.surface.load_from_file("assets\\gfx\\ic_launcher.png"))
-        self.window.set_title("Flappy Birds")
         load_assets()
+        self.window.set_icon(resources.surface.get("icon"))
+        self.window.set_title("Flappy Birds")
 
         self.set_scene(StarterScene())
 

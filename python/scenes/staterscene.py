@@ -84,19 +84,21 @@ class Button(GraphicNode):
         super().__init__(resources.surface.get(f"button_{button_name}"))
         self.pressed = False
 
+    def on_pressed(self):
+        pass
+
     def update(self):
         super().update()
 
         mouse_pressed = self.program.devices.mouse.get_pressed(pygame.BUTTON_LEFT)
         if (
-            mouse_inside_button := self.hitbox.rect.collidepoint(
-                self.program.devices.mouse.pos
-            )
+            self.hitbox.rect.collidepoint(self.program.devices.mouse.pos)
         ) and not self.pressed:
             self.pressed = self.program.devices.mouse.get_pressed_in_frame(
                 pygame.BUTTON_LEFT
             )
-        elif not mouse_inside_button or (mouse_inside_button and not mouse_pressed):
+        elif self.pressed and not mouse_pressed:
+            self.on_pressed()
             self.pressed = False
 
     def draw(self):

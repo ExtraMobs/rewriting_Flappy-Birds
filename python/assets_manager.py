@@ -15,6 +15,7 @@ def load_assets():
     resources.surface.set(
         "atlas", resources.surface.load_from_file("assets\\gfx\\atlas.png")
     )
+    resources.surface.add_from_file("icon", "assets\\gfx\\ic_launcher.png")
 
     atlas_coords = open("atlas.txt", "r")
     for line in atlas_coords.readlines():
