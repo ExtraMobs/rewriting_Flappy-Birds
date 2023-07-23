@@ -2,12 +2,8 @@ import os
 import pickle
 
 import pygame
-
 import state
 from constants import GameMode, Sounds
-from gameengine import resources
-from gameengine.basenode import BaseNode
-from gameengine.scene import BaseScene
 from objects.background import Bush, City, Clouds, Floor
 from objects.buttons import BtnPause
 from objects.labels import BigScoreLabel
@@ -16,6 +12,10 @@ from objects.others import StarterTip
 from objects.pipes import Pipes
 from objects.player import Player
 from objects.ui.endscreen import Ending
+
+from gameengine import resources
+from gameengine.basenode import BaseNode
+from gameengine.scene import BaseScene
 
 
 class Background(BaseNode):

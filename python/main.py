@@ -1,4 +1,5 @@
 import pygame
+
 from assets_manager import load_assets
 from gameengine import resources
 from gameengine.engine import Program

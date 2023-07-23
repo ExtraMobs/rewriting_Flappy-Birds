@@ -33,10 +33,6 @@ class EventsManager:
         self.uncaught_events = pygame.event.get()
 
 
-class DefaultScene(BaseScene):
-    pass
-
-
 class Program:
     scene = None
 
@@ -53,7 +49,7 @@ class Program:
         self.devices = Devices(self)
         self.event = EventsManager()
 
-        self.scene = DefaultScene()
+        self.scene = BaseScene()
 
     def set_scene(self, new_scene):
         self.scene = new_scene
