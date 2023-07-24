@@ -50,11 +50,39 @@ class UpdateManager:
         ):
             self.node.rotation.update(self)
             self.rotation_angle = new_rotation_angle
+
         if animation_updated or rotation_updated:
             self.node.rect.size = self.node.surface.get_size()
 
+        self.node.shader_manager.update()
 
-class GraphicNode(BaseNode):
+
+class ShadingManager(BaseNode):
+    def add_shader(self, *new_shaders):
+        self.add_children(*new_shaders)
+
+    def draw(self, surf):
+        for shader in self.children:
+            shader.draw(
+                pygame.surfarray.pixels2d(surf), pygame.surfarray.pixels3d(surf)
+            )
+
+
+class ShadingNode(BaseNode):
+    def __init__(self, *children):
+        super().__init__(*children)
+        self.shader_manager = ShadingManager()
+
+    def update(self):
+        super().update()
+        self.shader_manager.update()
+
+    def draw(self):
+        super().draw()
+        self.shader_manager.draw(self.surface)
+
+
+class GraphicNode(ShadingNode):
     surface = None
     rect = None
     offset = None
@@ -92,6 +120,7 @@ class GraphicNode(BaseNode):
 
     def draw(self):
         if self.visible:
+            self.shader_manager.draw(self.surface)
             self.hitbox.update(self.surface, self.rect)
             if self.bg is not None:
                 self.surface.fill(self.bg)

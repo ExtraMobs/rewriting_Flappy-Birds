@@ -41,6 +41,9 @@ class PlayButton(Button):
         self.rect.x = 20
         self.rect.y = 340
 
+    def on_pressed(self):
+        self.program.scene.fading_shader.timer.unpause()
+
 
 class ScoreButton(Button):
     def __init__(self):
