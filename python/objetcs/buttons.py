@@ -55,7 +55,7 @@ class RateButton(Button):
         super().__init__("rate")
 
         self.rect.centerx = self.program.display.rect.centerx
-        self.rect.y = self.program.display.rect.centery + 20
+        self.rect.y = self.program.display.rect.centery + 14
 
 
 class StaterButtons(BaseNode):

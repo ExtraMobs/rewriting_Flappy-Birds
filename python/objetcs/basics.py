@@ -30,24 +30,20 @@ class Bird(GraphicNode):
         )
 
         if state == Bird.IDLE:
-            self.rect.centery = self.program.display.rect.centery - 20
+            self.rect.centery = self.program.display.rect.centery - 31
         self.rect.centerx = self.program.display.rect.centerx
 
         self.__temp_int = 0
 
     def update(self):
-        self.__temp_int += 1
+        self.__temp_int += 1 / (1 / 8.25 / self.program.time.delta)
         if self.state == Bird.IDLE:
-            # a taxa de tempo é 7.18 (????), esse valor foi coletado através de observação
-            self.rect.y += (
-                -(math.sin(self.__temp_int / 7.18) * 30) * self.program.time.delta
-            )
+            self.rect.y += math.sin(self.__temp_int) / 2
 
         if self.animation.frame_index == 2:
             self.animation.reverse = True
         elif self.animation.frame_index == 0:
             self.animation.reverse = False
-
         super().update()
 
 

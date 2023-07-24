@@ -8,7 +8,7 @@ class CopyrightLabel(GraphicNode):
     def __init__(self):
         super().__init__(resources.surface.get("brand_copyright"))
         self.rect.centerx = self.program.display.rect.centerx
-        self.rect.y = self.program.display.rect.height - 93
+        self.rect.y = self.program.display.rect.height - 94
 
 
 class FlappyTitle(GraphicNode):
