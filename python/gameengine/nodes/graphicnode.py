@@ -1,8 +1,7 @@
 import pygame
 
-from gameengine.animation import Animation
-
-from .basenode import BaseNode
+from ..utils.animation import Animation
+from .shadingnode import ShadingNode
 
 
 class HitBox:
@@ -55,31 +54,6 @@ class UpdateManager:
             self.node.rect.size = self.node.surface.get_size()
 
         self.node.shader_manager.update()
-
-
-class ShadingManager(BaseNode):
-    def add_shader(self, *new_shaders):
-        self.add_children(*new_shaders)
-
-    def draw(self, surf):
-        for shader in self.children:
-            shader.draw(
-                pygame.surfarray.pixels2d(surf), pygame.surfarray.pixels3d(surf)
-            )
-
-
-class ShadingNode(BaseNode):
-    def __init__(self, *children):
-        super().__init__(*children)
-        self.shader_manager = ShadingManager()
-
-    def update(self):
-        super().update()
-        self.shader_manager.update()
-
-    def draw(self):
-        super().draw()
-        self.shader_manager.draw(self.surface)
 
 
 class GraphicNode(ShadingNode):

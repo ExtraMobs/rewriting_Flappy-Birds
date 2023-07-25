@@ -5,11 +5,11 @@ import random
 import numpy
 
 from gameengine import resources
-from gameengine.animation import Animation
-from gameengine.graphicnode import GraphicNode
-from gameengine.scene import BaseScene
-from gameengine.shader import FakeShader
-from gameengine.timer import Timer
+from gameengine.nodes.basescene import BaseScene
+from gameengine.nodes.graphicnode import GraphicNode
+from gameengine.utils.animation import Animation
+from gameengine.utils.shader import FakeShader
+from gameengine.utils.timer import Timer
 
 
 class Background(GraphicNode):
@@ -40,8 +40,8 @@ class Bird(GraphicNode):
         self.__temp_int = 0
 
     def update(self):
-        self.__temp_int += 8.25 * self.program.time.delta
         if self.state == Bird.IDLE:
+            self.__temp_int += 8.25 * self.program.time.delta
             self.rect.y += math.sin(self.__temp_int) * (30 * self.program.time.delta)
 
         if self.animation.frame_index == 2:
@@ -63,9 +63,8 @@ class Floor(GraphicNode):
 
 class FadingShader(FakeShader):
     def __init__(self):
-        self.timer = Timer(0.1832)
-        self.timer.pause()
-
+        self.timer = Timer(0.4)
+        self.timer.auto_pause = True
         self.reversed = False
 
         super().__init__(self.timer)

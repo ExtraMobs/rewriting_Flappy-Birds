@@ -1,4 +1,4 @@
-from .basenode import BaseNode
+from ..nodes.basenode import BaseNode
 
 
 class Timer(BaseNode):

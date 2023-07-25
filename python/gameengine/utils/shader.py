@@ -1,4 +1,4 @@
-from gameengine.basenode import BaseNode
+from gameengine.nodes.basenode import BaseNode
 
 
 class FakeShader(BaseNode):

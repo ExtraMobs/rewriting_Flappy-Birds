@@ -1,7 +1,7 @@
 from gameengine import resources
-from gameengine.graphicnode import GraphicNode
-from objetcs.basics import DefaultScene
+from gameengine.nodes.graphicnode import GraphicNode
 from objetcs.buttons import StaterButtons
+from objetcs.default import DefaultScene
 
 
 class CopyrightLabel(GraphicNode):
@@ -22,3 +22,4 @@ class FlappyTitle(GraphicNode):
 class StarterScene(DefaultScene):
     def __init__(self):
         super().__init__(StaterButtons(), FlappyTitle(), CopyrightLabel())
+        self.fading_shader.timer.pause()

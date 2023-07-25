@@ -1,7 +1,7 @@
 from assets_manager import load_assets
 from gameengine import resources
-from gameengine.engine import Program
-from gameengine.window import Display, Window
+from gameengine.core.program import Program
+from gameengine.core.window import Display, Window
 from scenes.staterscene import StarterScene
 
 

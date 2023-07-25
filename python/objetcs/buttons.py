@@ -1,8 +1,8 @@
 import pygame
 
 from gameengine import resources
-from gameengine.basenode import BaseNode
-from gameengine.graphicnode import GraphicNode
+from gameengine.nodes.basenode import BaseNode
+from gameengine.nodes.graphicnode import GraphicNode
 
 
 class Button(GraphicNode):

@@ -1,4 +1,4 @@
-from gameengine.graphicnode import ShadingNode
+from gameengine.nodes.graphicnode import ShadingNode
 
 
 class BaseScene(ShadingNode):

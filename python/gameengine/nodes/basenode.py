@@ -1,8 +1,16 @@
-class BaseNode:
-    parent = None
-    program = None
+from typing import TYPE_CHECKING
 
-    def __init__(self, *children):
+import pygame
+
+if TYPE_CHECKING:
+    from gameengine.generics import Program
+
+
+class BaseNode:
+    parent: "BaseNode"
+    program: "Program"
+
+    def __init__(self, *children) -> None:
         """
         BaseNode is the base class for all objects in the scenes.
 
@@ -12,7 +20,7 @@ class BaseNode:
         self.children = []
         self.add_children(*children)
 
-    def add_children(self, *children):
+    def add_children(self, *children) -> None:
         """
         Add children to node.
 
@@ -23,7 +31,7 @@ class BaseNode:
             self.children.append(child)
             child.parent = self
 
-    def remove_children(self, *children):
+    def remove_children(self, *children) -> None:
         """
         Remove children from node.
 
@@ -33,40 +41,40 @@ class BaseNode:
         for child in children:
             child.kill()
 
-    def kill(self):
+    def kill(self) -> None:
         """
         Kill yourself. Killing a node removes it from its parent.
         """
         if self.parent is not None:
             self.parent.children.remove(self)
 
-    def update(self):
+    def update(self) -> None:
         if not self.program.request_quit:
             for child in list(self.children):
                 child.update()
 
-    def draw(self):
+    def draw(self) -> None:
         for child in self.children:
             child.draw()
 
     @property
-    def surface(self):
+    def surface(self) -> pygame.Surface:
         return self.parent.surface
 
     @property
-    def active(self):
+    def active(self) -> bool:
         return bool(sum(child.active for child in self.children))
 
     @active.setter
-    def active(self, value):
+    def active(self, value: bool) -> None:
         for child in self.children:
             child.active = value
 
     @property
-    def visible(self):
+    def visible(self) -> bool:
         return bool(sum(child.visible for child in self.children))
 
     @visible.setter
-    def visible(self, value):
+    def visible(self, value: bool) -> None:
         for child in self.children:
             child.active = value

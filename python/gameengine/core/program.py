@@ -1,60 +1,69 @@
 import pygame
 
-from .basenode import BaseNode
-from .devices import Devices
-from .scene import BaseScene
-from .window import Display, Window
+from gameengine.core.devices import Devices
+from gameengine.core.window import Display, Window
+from gameengine.nodes.basenode import BaseNode
+from gameengine.nodes.basescene import BaseScene
 
 pygame.init()
 
 
 class TimeManager:
-    target_framerate = None
-    delta = None
-    clock = None
+    target_framerate: int
+    delta: float
+    clock: pygame.Clock
 
-    def __init__(self, target_framerate):
+    def __init__(self, target_framerate: int) -> None:
         self.set_framerate(target_framerate)
         self.delta = 1 / target_framerate
-
         self.clock = pygame.time.Clock()
 
-    def set_framerate(self, new_framerate):
+    def set_framerate(self, new_framerate: int) -> None:
         self.target_framerate = new_framerate
 
-    def update(self):
+    def update(self) -> None:
         self.delta = self.clock.tick(self.target_framerate) / 1000
 
 
 class EventsManager:
-    uncaught_events = None
+    uncaught_events: list[pygame.Event]
 
     def update(self):
         self.uncaught_events = pygame.event.get()
 
 
 class Program:
-    scene = None
+    request_quit: bool
 
-    request_quit = False
+    window: Window
+    display: Display
 
-    def __init__(self, window: Window, display: Display = None, framerate=30):
+    time: TimeManager
+    devices: Devices
+    event: EventsManager
+
+    scene: BaseScene
+
+    def __init__(
+        self, window: Window, display: Display = None, framerate: int = 30
+    ) -> None:
+        self.request_quit = False
         BaseNode.program = self
         pygame.register_quit(self.quit)
         self.window = window
         self.display = display
         if display is None:
             self.display = Display(window.size)
-        self.time = TimeManager(framerate)
         self.devices = Devices(self)
+        self.time = TimeManager(framerate)
         self.event = EventsManager()
 
         self.scene = BaseScene()
 
-    def set_scene(self, new_scene):
+    def set_scene(self, new_scene: BaseScene) -> None:
         self.scene = new_scene
 
-    def update(self):
+    def update(self) -> None:
         self.request_quit = len(pygame.event.get(pygame.QUIT)) > 0
         self.devices.update()
         self.event.update()
@@ -67,10 +76,10 @@ class Program:
 
             self.time.update()
 
-    def quit(self):
+    def quit(self) -> None:
         pass
 
-    def start_loop(self):
+    def start_loop(self) -> None:
         while not self.request_quit:
             self.update()
         pygame.quit()
