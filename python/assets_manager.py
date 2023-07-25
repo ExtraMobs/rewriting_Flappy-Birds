@@ -1,3 +1,4 @@
+import os
 from dataclasses import dataclass
 
 import pygame
@@ -32,3 +33,8 @@ def load_assets():
         resources.surface.set(name, resources.surface.slice("atlas", rect)[0])
 
         # pygame.image.save(resources.surface.get(name), f"assets\\{name}.png")
+
+    for sound_file in os.listdir(sound_path := "assets\\sounds\\"):
+        resources.sound.add_from_file(
+            os.path.splitext(sound_file)[0], os.path.join(sound_path, sound_file)
+        )

@@ -2,6 +2,7 @@ from assets_manager import load_assets
 from gameengine import resources
 from gameengine.core.program import Program
 from gameengine.core.window import Display, Window
+from scenes.gamescene import GameScene
 from scenes.staterscene import StarterScene
 
 
@@ -11,6 +12,8 @@ class Flappy(Program):
         load_assets()
         self.window.set_icon(resources.surface.get("icon"))
         self.window.set_title("Flappy Birds")
+
+        resources.scenes.add(stater=StarterScene, game=GameScene)
 
         self.set_scene(StarterScene())
 
