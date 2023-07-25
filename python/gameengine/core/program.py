@@ -1,9 +1,12 @@
-import pygame
+import ctypes
 
+import pygame
 from gameengine.core.devices import Devices
 from gameengine.core.window import Display, Window
 from gameengine.nodes.basenode import BaseNode
 from gameengine.nodes.basescene import BaseScene
+
+ctypes.windll.user32.SetProcessDPIAware()
 
 pygame.init()
 

@@ -1,5 +1,4 @@
 import pygame
-
 from gameengine import resources
 from gameengine.nodes.basenode import BaseNode
 from gameengine.nodes.graphicnode import GraphicNode
@@ -42,6 +41,8 @@ class PlayButton(Button):
         self.rect.y = 340
 
     def on_pressed(self):
+        if self.program.scene.fading_shader.timer.paused:
+            pygame.mixer.Channel(0).play(resources.sound.get("sfx_swooshing"))
         self.program.scene.fading_shader.timer.unpause()
 
 

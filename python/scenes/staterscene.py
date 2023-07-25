@@ -1,5 +1,4 @@
 import pygame
-
 from gameengine import resources
 from gameengine.nodes.graphicnode import GraphicNode
 from objetcs.buttons import StaterButtons
@@ -30,4 +29,3 @@ class StarterScene(DefaultScene):
         super().update()
         if self.fading_shader.timer.reached:
             self.program.set_scene(resources.scenes.get("game")())
-            pygame.mixer.Channel(0).play(resources.sound.get("sfx_swooshing"))

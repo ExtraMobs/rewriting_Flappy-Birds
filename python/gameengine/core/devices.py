@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import pygame
-
 from gameengine.generics import Button, Key, KeySate, Program, Vector2
 
 
