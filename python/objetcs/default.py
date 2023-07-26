@@ -3,6 +3,7 @@ import math
 import random
 
 import numpy
+
 from gameengine import resources
 from gameengine.nodes.basescene import BaseScene
 from gameengine.nodes.graphicnode import GraphicNode
@@ -32,12 +33,12 @@ class Bird(GraphicNode):
             )
         )
 
-        if self.program.scene.__class__ is BaseScene:
-            self.rect.centery = self.program.display.rect.centery - 34
+        if self.program.scene.__class__.__name__ == "BaseScene":
+            self.rect.centery = self.program.display.rect.centery - 35
             self.rect.centerx = self.program.display.rect.centerx
-        else:
-            self.rect.centery = self.program.display.rect.centery - 34
-            self.rect.centerx = self.program.display.rect.centerx
+        elif self.program.scene.__class__.__name__ == "StarterScene":
+            self.rect.centery = self.program.display.rect.centery - 5
+            self.rect.centerx = self.program.display.rect.centerx - 55
 
         self.__temp_int = 0
 

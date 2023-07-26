@@ -1,4 +1,5 @@
 import pygame
+
 from gameengine import resources
 from gameengine.nodes.basenode import BaseNode
 from gameengine.nodes.graphicnode import GraphicNode

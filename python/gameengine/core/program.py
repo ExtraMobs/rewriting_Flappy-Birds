@@ -1,6 +1,7 @@
 import ctypes
 
 import pygame
+
 from gameengine.core.devices import Devices
 from gameengine.core.window import Display, Window
 from gameengine.nodes.basenode import BaseNode

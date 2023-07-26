@@ -2,6 +2,7 @@ import os
 from dataclasses import dataclass
 
 import pygame
+
 from gameengine import resources
 
 

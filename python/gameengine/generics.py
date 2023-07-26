@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pygame
+
 from gameengine.nodes.basenode import BaseNode
 from gameengine.nodes.basescene import BaseScene
 from gameengine.nodes.graphicnode import GraphicNode

@@ -1,4 +1,3 @@
-import pygame
 from gameengine import resources
 from gameengine.nodes.graphicnode import GraphicNode
 from objetcs.buttons import StaterButtons
