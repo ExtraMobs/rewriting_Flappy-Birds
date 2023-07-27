@@ -9,7 +9,7 @@ from scenes.staterscene import StarterScene
 
 class Flappy(Program):
     def __init__(self):
-        super().__init__(Window((518, 920), pygame.OPENGLBLIT | pygame.FULLSCREEN), Display((288, 512)), framerate=60)
+        super().__init__(Window((518, 920)), Display((288, 512)), framerate=60)
         load_assets()
         self.window.set_icon(resources.surface.get("icon"))
         self.window.set_title("Flappy Birds")
