@@ -1,4 +1,5 @@
 import pygame
+
 from assets_manager import load_assets
 from gameengine import resources
 from gameengine.core.program import Program
@@ -21,4 +22,3 @@ class Flappy(Program):
 
 if __name__ == "__main__":
     Flappy().start_loop()
-

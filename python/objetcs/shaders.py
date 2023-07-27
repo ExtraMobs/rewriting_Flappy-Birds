@@ -20,6 +20,7 @@ class FadingShader(FakeShader):
 class FadingBlackShader(FadingShader):
     def __init__(self, reversed):
         super().__init__(0.4, reversed)
+
     def draw(self, pixels2d, pixels3d, pixels_alpha):
         if not self.timer.reached and not self.timer.paused:
             tax = self.get_tax()
@@ -29,6 +30,7 @@ class FadingBlackShader(FadingShader):
 class FadingAlpha(FadingShader):
     def __init__(self):
         super().__init__(0.4)
+
     def draw(self, pixels2d, pixels3d, pixels_alpha):
         tax = self.get_tax()
         numpy.multiply(pixels_alpha, tax, pixels_alpha, casting="unsafe")

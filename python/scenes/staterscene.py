@@ -1,7 +1,9 @@
+import numpy
+
 from gameengine import resources
 from gameengine.nodes.graphicnode import GraphicNode
 from objetcs.buttons import StaterButtons
-from objetcs.default import DefaultScene
+from objetcs.default import Bird, DefaultScene
 
 
 class CopyrightLabel(GraphicNode):
@@ -21,9 +23,15 @@ class FlappyTitle(GraphicNode):
 
 class StarterScene(DefaultScene):
     def __init__(self):
-        super().__init__(False, StaterButtons(), FlappyTitle(), CopyrightLabel())
+        super().__init__(
+            Bird(Bird.IDLE), False, StaterButtons(), FlappyTitle(), CopyrightLabel()
+        )
+
+        self.a = numpy.zeros((10000, 10000, 3))
+        self.a.fill(255)
 
     def update(self):
         super().update()
         if self.fading_shader.timer.reached:
             self.program.set_scene(resources.scenes.get("game")())
+            del self
