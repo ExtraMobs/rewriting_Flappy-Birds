@@ -21,7 +21,7 @@ class FlappyTitle(GraphicNode):
 
 class StarterScene(DefaultScene):
     def __init__(self):
-        super().__init__(StaterButtons(), FlappyTitle(), CopyrightLabel())
+        super().__init__(False, StaterButtons(), FlappyTitle(), CopyrightLabel())
 
     def update(self):
         super().update()

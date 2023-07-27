@@ -64,9 +64,9 @@ class Floor(GraphicNode):
 
 
 class DefaultScene(BaseScene):
-    def __init__(self, *children):
+    def __init__(self, reversed_shader, *children):
         self.bird = Bird(Bird.IDLE)
-        self.fading_shader = FadingBlackShader()
+        self.fading_shader = FadingBlackShader(reversed_shader)
 
         super().__init__(Background(), self.bird, Floor(), *children)
 
