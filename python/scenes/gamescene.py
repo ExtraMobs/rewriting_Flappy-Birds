@@ -1,29 +1,13 @@
 import pygame
 
 from gameengine import resources
-from gameengine.nodes.graphicnode import GraphicNode
 from objetcs.default import DefaultScene
-
-
-class TapTip(GraphicNode):
-    def __init__(self):
-        super().__init__(resources.surface.get("tutorial"))
-
-        self.rect.centerx = self.program.display.rect.centerx
-        self.rect.centery = self.program.display.rect.centery + 12
-
-
-class GetReadyLabel(GraphicNode):
-    def __init__(self):
-        super().__init__(resources.surface.get("text_ready"))
-
-        self.rect.centerx = self.program.display.rect.centerx
-        self.rect.centery = self.program.display.rect.centery - 80
+from scenes.introduction import Introduction
 
 
 class GameScene(DefaultScene):
     def __init__(self):
-        super().__init__(TapTip(), GetReadyLabel())
+        super().__init__(Introduction())
         self.fading_shader.reversed = True
 
     def update(self) -> None:

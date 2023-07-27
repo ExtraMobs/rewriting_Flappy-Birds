@@ -2,14 +2,11 @@ import enum
 import math
 import random
 
-import numpy
-
 from gameengine import resources
 from gameengine.nodes.basescene import BaseScene
 from gameengine.nodes.graphicnode import GraphicNode
 from gameengine.utils.animation import Animation
-from gameengine.utils.shader import FakeShader
-from gameengine.utils.timer import Timer
+from objetcs.shaders import FadingBlackShader
 
 
 class Background(GraphicNode):
@@ -40,10 +37,12 @@ class Bird(GraphicNode):
             self.rect.centery = self.program.display.rect.centery - 5
             self.rect.centerx = self.program.display.rect.centerx - 55
 
+        self.__playing = False
+
         self.__temp_int = 0
 
     def update(self):
-        if self.state == Bird.IDLE:
+        if not self.__playing:
             self.__temp_int += 8.25 * self.program.time.delta
             self.rect.y += math.sin(self.__temp_int) * (30 * self.program.time.delta)
 
@@ -64,27 +63,11 @@ class Floor(GraphicNode):
         self.rect.x %= self.program.display.width - self.rect.w
 
 
-class FadingShader(FakeShader):
-    def __init__(self):
-        self.timer = Timer(0.4)
-        self.timer.auto_pause = True
-        self.reversed = False
-
-        super().__init__(self.timer)
-
-    def draw(self, pixels2d, pixels3d):
-        if not self.timer.reached and not self.timer.paused:
-            tax = self.timer.current_time / self.timer.target_time
-            if not self.reversed:
-                tax = 1 - tax
-            numpy.multiply(pixels3d, (tax, tax, tax), pixels3d, casting="unsafe")
-
-
 class DefaultScene(BaseScene):
     def __init__(self, *children):
         self.bird = Bird(Bird.IDLE)
-        self.fading_shader = FadingShader()
+        self.fading_shader = FadingBlackShader()
 
         super().__init__(Background(), self.bird, Floor(), *children)
 
-        self.shader_manager.add_shader(self.fading_shader)
+        self.add_shader(self.fading_shader)
