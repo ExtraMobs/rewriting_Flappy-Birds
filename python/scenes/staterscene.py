@@ -27,11 +27,7 @@ class StarterScene(DefaultScene):
             Bird(Bird.IDLE), False, StaterButtons(), FlappyTitle(), CopyrightLabel()
         )
 
-        self.a = numpy.zeros((10000, 10000, 3))
-        self.a.fill(255)
-
     def update(self):
         super().update()
         if self.fading_shader.timer.reached:
             self.program.set_scene(resources.scenes.get("game")())
-            del self
