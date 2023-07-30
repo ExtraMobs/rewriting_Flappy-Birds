@@ -18,6 +18,7 @@ class Background(GraphicNode):
 class Bird(GraphicNode):
     IDLE = enum.auto()
     PREPARE = enum.auto()
+    PLAYING = enum.auto()
 
     def __init__(self, state):
         self.state = state
@@ -37,12 +38,11 @@ class Bird(GraphicNode):
         elif state == self.PREPARE:
             self.rect.centery = self.program.display.rect.centery - 5
             self.rect.centerx = self.program.display.rect.centerx - 55
-        self.__playing = False
 
         self.__temp_int = 0
 
     def update(self):
-        if not self.__playing:
+        if not self.state is self.PLAYING:
             self.__temp_int += 8.25 * self.program.time.delta
             self.rect.y += math.sin(self.__temp_int) * (30 * self.program.time.delta)
 
@@ -64,8 +64,8 @@ class Floor(GraphicNode):
 
 
 class DefaultScene(BaseScene):
-    def __init__(self, bird_player, reversed_shader, *children):
-        self.bird = bird_player
+    def __init__(self, bird_state, reversed_shader, *children):
+        self.bird = Bird(bird_state)
         self.fading_shader = FadingBlackShader(reversed_shader)
 
         super().__init__(Background(), self.bird, Floor(), *children)

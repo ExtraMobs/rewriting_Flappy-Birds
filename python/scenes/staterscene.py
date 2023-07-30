@@ -24,7 +24,7 @@ class FlappyTitle(GraphicNode):
 class StarterScene(DefaultScene):
     def __init__(self):
         super().__init__(
-            Bird(Bird.IDLE), False, StaterButtons(), FlappyTitle(), CopyrightLabel()
+            Bird.IDLE, False, StaterButtons(), FlappyTitle(), CopyrightLabel()
         )
 
     def update(self):
