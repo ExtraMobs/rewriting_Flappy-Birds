@@ -7,6 +7,8 @@ from scenes.introduction import Introduction
 
 class GameScene(DefaultScene):
     def __init__(self):
+        self.gravity = 480
+
         self.intro = Introduction()
         super().__init__(Bird.PREPARE, True, self.intro)
         self.fading_shader.timer.unpause()

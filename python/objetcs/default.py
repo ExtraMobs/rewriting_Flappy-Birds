@@ -42,7 +42,9 @@ class Bird(GraphicNode):
         self.__temp_int = 0
 
     def update(self):
-        if not self.state is self.PLAYING:
+        if self.state is self.PLAYING:
+            ...
+        else:
             self.__temp_int += 8.25 * self.program.time.delta
             self.rect.y += math.sin(self.__temp_int) * (30 * self.program.time.delta)
 
