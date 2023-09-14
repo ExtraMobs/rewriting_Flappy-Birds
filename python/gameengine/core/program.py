@@ -4,8 +4,8 @@ import pygame
 
 from gameengine.core.devices import Devices
 from gameengine.core.window import Display, Window
-from gameengine.nodes.basenode import BaseNode
-from gameengine.nodes.basescene import BaseScene
+from gameengine.nodes.node import Node
+from gameengine.nodes.scene import Scene
 
 ctypes.windll.user32.SetProcessDPIAware()
 
@@ -18,8 +18,12 @@ class TimeManager:
     clock: pygame.Clock
 
     def __init__(self, target_framerate: int) -> None:
-        self.set_framerate(target_framerate)
-        self.delta = 1 / target_framerate
+        self.set_framerate(
+            pygame.display.get_current_refresh_rate()
+            if target_framerate is None
+            else target_framerate
+        )
+        self.delta = 1 / self.target_framerate
         self.clock = pygame.time.Clock()
 
     def set_framerate(self, new_framerate: int) -> None:
@@ -46,13 +50,13 @@ class Program:
     devices: Devices
     event: EventsManager
 
-    scene: BaseScene
+    scene: Scene
 
     def __init__(
-        self, window: Window, display: Display = None, framerate: int = 30
+        self, window: Window, display: Display = None, framerate: int = None
     ) -> None:
         self.request_quit = False
-        BaseNode.program = self
+        Node.program = self
         pygame.register_quit(self.quit)
         self.window = window
         self.display = display
@@ -62,9 +66,9 @@ class Program:
         self.time = TimeManager(framerate)
         self.event = EventsManager()
 
-        self.scene = BaseScene()
+        self.scene = Scene()
 
-    def set_scene(self, new_scene: BaseScene) -> None:
+    def set_scene(self, new_scene: Scene) -> None:
         self.scene = new_scene
 
     def update(self) -> None:

@@ -1,6 +1,6 @@
 from gameengine import resources
-from gameengine.nodes.basenode import BaseNode
 from gameengine.nodes.graphicnode import GraphicNode
+from gameengine.nodes.node import Node
 from objetcs.shaders import FadingAlpha
 
 
@@ -27,6 +27,6 @@ class GetReadyLabel(IntroductionNode):
         self.rect.centery = self.program.display.rect.centery - 80
 
 
-class Introduction(BaseNode):
+class Introduction(Node):
     def __init__(self):
         super().__init__(TapTip(), GetReadyLabel())

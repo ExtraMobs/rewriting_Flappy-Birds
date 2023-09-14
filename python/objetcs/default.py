@@ -3,9 +3,9 @@ import math
 import random
 
 from gameengine import resources
-from gameengine.nodes.basescene import BaseScene
+from gameengine.misc.animation import Animation
 from gameengine.nodes.graphicnode import GraphicNode
-from gameengine.utils.animation import Animation
+from gameengine.nodes.scene import Scene
 from objetcs.shaders import FadingBlackShader
 
 
@@ -65,7 +65,7 @@ class Floor(GraphicNode):
         self.rect.x %= self.program.display.width - self.rect.w
 
 
-class DefaultScene(BaseScene):
+class DefaultScene(Scene):
     def __init__(self, bird_state, reversed_shader, *children):
         self.bird = Bird(bird_state)
         self.fading_shader = FadingBlackShader(reversed_shader)

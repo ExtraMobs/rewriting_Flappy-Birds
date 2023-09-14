@@ -1,8 +1,8 @@
 import pygame
 
 from gameengine import resources
-from gameengine.nodes.basenode import BaseNode
 from gameengine.nodes.graphicnode import GraphicNode
+from gameengine.nodes.node import Node
 
 
 class Button(GraphicNode):
@@ -63,6 +63,6 @@ class RateButton(Button):
         self.rect.y = self.program.display.rect.centery + 14
 
 
-class StaterButtons(BaseNode):
+class StaterButtons(Node):
     def __init__(self):
         super().__init__(PlayButton(), ScoreButton(), RateButton())

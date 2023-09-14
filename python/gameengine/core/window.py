@@ -69,7 +69,9 @@ class Display(Metrics):
 class Window(Metrics):
     surface: pygame.Surface
 
-    def __init__(self, size: tuple[int, int] = (1, 1), *flags) -> None:
+    def __init__(self, title=None, size: tuple[int, int] = (1, 1), *flags) -> None:
+        if not title is None:
+            self.set_title(title)
         self.set_size(size, *flags)
 
     def update(self, display: Display) -> None:

@@ -1,7 +1,8 @@
 import numpy
+import pygame
 
-from gameengine.utils.shader import FakeShader
-from gameengine.utils.timer import Timer
+from gameengine.misc.shader import FakeShader
+from gameengine.misc.timer import Timer
 
 
 class FadingShader(FakeShader):
@@ -21,16 +22,18 @@ class FadingBlackShader(FadingShader):
     def __init__(self, reversed):
         super().__init__(0.4, reversed)
 
-    def draw(self, pixels2d, pixels3d, pixels_alpha):
+    def draw(self, surf):
+        surf_array = pygame.surfarray.pixels3d(surf)
         if not self.timer.reached and not self.timer.paused:
             tax = self.get_tax()
-            numpy.multiply(pixels3d, (tax, tax, tax), pixels3d, casting="unsafe")
+            numpy.multiply(surf_array, (tax, tax, tax), surf_array, casting="unsafe")
 
 
 class FadingAlpha(FadingShader):
     def __init__(self):
         super().__init__(0.4)
 
-    def draw(self, pixels2d, pixels3d, pixels_alpha):
+    def draw(self, surf):
+        pixels_alpha = pygame.surfarray.pixels_alpha(surf)
         tax = self.get_tax()
         numpy.multiply(pixels_alpha, tax, pixels_alpha, casting="unsafe")
